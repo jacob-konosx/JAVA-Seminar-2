@@ -1,16 +1,25 @@
 package model;
 
 public class Course {
+    private static long idCounter = 100000;
     private long c_ID;
     private String title;
     private int creditPoints;
     private Professor professor;
 
     public Course(long c_ID, String title, int creditPoints, Professor professor) {
-        this.c_ID = c_ID;
+        idCounter++;
+        this.c_ID = idCounter;
         this.title = title;
         this.creditPoints = creditPoints;
         this.professor = professor;
+    }
+    public Course() {
+        idCounter++;
+        this.c_ID = idCounter;
+        this.title = "Title Required";
+        this.creditPoints = 1;
+        this.professor = new Professor();
     }
 
     public boolean checkForSpecChar(String s){
@@ -26,6 +35,7 @@ public class Course {
     }
 
 //    public void setC_ID(long c_ID) {
+//        idCounter++;
 //        this.c_ID = c_ID;
 //    }
 

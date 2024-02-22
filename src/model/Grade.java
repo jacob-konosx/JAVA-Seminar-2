@@ -12,6 +12,12 @@ public class Grade {
         this.student = student;
         this.course = course;
     }
+    public Grade() {
+        this.g_ID = 0;
+        this.value = 0;
+        this.student = new Student();
+        this.course = new Course();
+    }
 
     public long getG_ID() {
         return g_ID;

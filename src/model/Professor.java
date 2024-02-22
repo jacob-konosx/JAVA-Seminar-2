@@ -4,7 +4,7 @@ public class Professor {
     private long p_ID;
     private String name;
     private String surname;
-    private String degree;
+    private Degree degree;
     public boolean checkForSpecChar(String s){
         for (int i = 0; i < s.length(); i++) {
             if (!Character.isDigit(s.charAt(i)) && !Character.isLetter(s.charAt(i)) && !Character.isWhitespace(s.charAt(i))) {
@@ -14,11 +14,17 @@ public class Professor {
         return false;
     }
 
-    public Professor(long p_ID, String name, String surname, String degree) {
+    public Professor(long p_ID, String name, String surname, Degree degree) {
         this.p_ID = p_ID;
         this.name = name;
         this.surname = surname;
         this.degree = degree;
+    }
+    public Professor() {
+        this.p_ID = 0;
+        this.name = "Name Required";
+        this.surname = "Surname Required";
+        this.degree = Degree.bsc;
     }
 
     public long getP_ID() {
@@ -47,11 +53,11 @@ public class Professor {
         this.surname = surname;
     }
 
-    public String getDegree() {
+    public Degree getDegree() {
         return degree;
     }
 
-    public void setDegree(String degree) {
+    public void setDegree(Degree degree) {
         this.degree = degree;
     }
 

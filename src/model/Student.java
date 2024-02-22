@@ -18,6 +18,11 @@ public class Student {
         this.name = name;
         this.surname = surname;
     }
+    public Student() {
+        this.st_ID = 0;
+        this.name = "Name Required";
+        this.surname = "Surname Required";
+    }
 
     public long getSt_ID() {
         return st_ID;
