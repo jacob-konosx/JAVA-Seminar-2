@@ -1,19 +1,20 @@
 package model;
 
 public class Grade {
+    private static long idCounter = 0;
     private long g_ID;
     private int value;
     private Student student;
     private Course course;
 
-    public Grade(long g_ID, int value, Student student, Course course) {
-        this.g_ID = g_ID;
+    public Grade(int value, Student student, Course course) {
+        setG_ID();
         this.value = value;
         this.student = student;
         this.course = course;
     }
     public Grade() {
-        this.g_ID = 0;
+        setG_ID();
         this.value = 0;
         this.student = new Student();
         this.course = new Course();
@@ -23,9 +24,10 @@ public class Grade {
         return g_ID;
     }
 
-//    public void setG_ID(long g_ID) {
-//        this.g_ID = g_ID;
-//    }
+    public void setG_ID() {
+        idCounter++;
+        this.g_ID = idCounter;
+    }
 
     public int getValue() {
         return value;

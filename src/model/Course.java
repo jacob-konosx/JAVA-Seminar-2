@@ -1,22 +1,20 @@
 package model;
 
 public class Course {
-    private static long idCounter = 100000;
+    private static long idCounter = 0;
     private long c_ID;
     private String title;
     private int creditPoints;
     private Professor professor;
 
-    public Course(long c_ID, String title, int creditPoints, Professor professor) {
-        idCounter++;
-        this.c_ID = idCounter;
+    public Course(String title, int creditPoints, Professor professor) {
+        setC_ID();
         this.title = title;
         this.creditPoints = creditPoints;
         this.professor = professor;
     }
     public Course() {
-        idCounter++;
-        this.c_ID = idCounter;
+        setC_ID();
         this.title = "Title Required";
         this.creditPoints = 1;
         this.professor = new Professor();
@@ -34,10 +32,10 @@ public class Course {
         return c_ID;
     }
 
-//    public void setC_ID(long c_ID) {
-//        idCounter++;
-//        this.c_ID = c_ID;
-//    }
+    public void setC_ID() {
+        idCounter++;
+        this.c_ID = idCounter;
+    }
 
     public String getTitle() {
         return title;
@@ -74,4 +72,5 @@ public class Course {
                 ", professor=" + professor +
                 '}';
     }
+
 }

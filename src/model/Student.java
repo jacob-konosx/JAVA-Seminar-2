@@ -1,6 +1,7 @@
 package model;
 
 public class Student {
+    private static long idCounter = 0;
     private long st_ID;
     private String name;
     private String surname;
@@ -13,13 +14,13 @@ public class Student {
         return false;
     }
 
-    public Student(long st_ID, String name, String surname) {
-        this.st_ID = st_ID;
+    public Student(String name, String surname) {
+        setSt_ID();
         this.name = name;
         this.surname = surname;
     }
     public Student() {
-        this.st_ID = 0;
+        setSt_ID();
         this.name = "Name Required";
         this.surname = "Surname Required";
     }
@@ -28,9 +29,10 @@ public class Student {
         return st_ID;
     }
 
-//    public void setSt_ID(long st_ID) {
-//        this.st_ID = st_ID;
-//    }
+    public void setSt_ID() {
+        idCounter++;
+        this.st_ID = idCounter;
+    }
 
     public String getName() {
         return name;

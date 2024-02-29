@@ -1,6 +1,7 @@
 package model;
 
 public class Professor {
+    private static long idCounter = 0;
     private long p_ID;
     private String name;
     private String surname;
@@ -14,14 +15,14 @@ public class Professor {
         return false;
     }
 
-    public Professor(long p_ID, String name, String surname, Degree degree) {
-        this.p_ID = p_ID;
+    public Professor(String name, String surname, Degree degree) {
+        setP_ID();
         this.name = name;
         this.surname = surname;
         this.degree = degree;
     }
     public Professor() {
-        this.p_ID = 0;
+        setP_ID();
         this.name = "Name Required";
         this.surname = "Surname Required";
         this.degree = Degree.bsc;
@@ -31,9 +32,10 @@ public class Professor {
         return p_ID;
     }
 
-//    public void setP_ID(long p_ID) {
-//        this.p_ID = p_ID;
-//    }
+    public void setP_ID() {
+        idCounter++;
+        this.p_ID = idCounter;
+    }
 
     public String getName() {
         return name;
