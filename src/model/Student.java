@@ -1,7 +1,7 @@
 package model;
 
 public class Student {
-    private static long idCounter = 0;
+    private static long idCounter = 100000;
     private long st_ID;
     private String name;
     private String surname;
@@ -16,8 +16,8 @@ public class Student {
 
     public Student(String name, String surname) {
         setSt_ID();
-        this.name = name;
-        this.surname = surname;
+        setName(name);
+        setSurname(surname);
     }
     public Student() {
         setSt_ID();

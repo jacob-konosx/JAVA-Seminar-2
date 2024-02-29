@@ -17,9 +17,9 @@ public class Professor {
 
     public Professor(String name, String surname, Degree degree) {
         setP_ID();
-        this.name = name;
-        this.surname = surname;
-        this.degree = degree;
+        setName(name);
+        setSurname(surname);
+        setDegree(degree);
     }
     public Professor() {
         setP_ID();

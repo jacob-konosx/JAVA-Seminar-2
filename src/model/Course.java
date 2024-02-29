@@ -1,7 +1,7 @@
 package model;
 
 public class Course {
-    private static long idCounter = 0;
+    private static long idCounter = 100000;
     private long c_ID;
     private String title;
     private int creditPoints;
@@ -9,9 +9,9 @@ public class Course {
 
     public Course(String title, int creditPoints, Professor professor) {
         setC_ID();
-        this.title = title;
-        this.creditPoints = creditPoints;
-        this.professor = professor;
+        setTitle(title);
+        setCreditPoints(creditPoints);
+        setProfessor(professor);
     }
     public Course() {
         setC_ID();
@@ -51,7 +51,7 @@ public class Course {
     }
 
     public void setCreditPoints(int creditPoints) {
-        if (creditPoints < 0 || creditPoints > 10) return;
+        if (creditPoints < 0 || creditPoints > 20) return;
         this.creditPoints = creditPoints;
     }
 
@@ -60,7 +60,10 @@ public class Course {
     }
 
     public void setProfessor(Professor professor) {
-        this.professor = professor;
+        if (professor != null)
+            this.professor = professor;
+        else
+            this.professor = new Professor();
     }
 
     @Override
