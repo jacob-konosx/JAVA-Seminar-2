@@ -3,6 +3,7 @@ package main;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class VeA_IS {
     public static ArrayList<Professor> allProfessors = new
@@ -143,8 +144,8 @@ public class VeA_IS {
         allStudents.add(stud2);
         allStudents.add(stud1);
 
-        Course course1 = new Course("Matene", 4, prof1);
-        Course course2 = new Course("Anglene", 2, prof2);
+        Course course1 = new Course("Matene", 4, new ArrayList<Professor>(Arrays.asList(prof1)));
+        Course course2 = new Course("Anglene", 2, new ArrayList<Professor>(Arrays.asList(prof2)));
         allCourses.add(course1);
         allCourses.add(course2);
 

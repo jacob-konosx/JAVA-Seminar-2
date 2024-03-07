@@ -1,23 +1,26 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Course {
     private static long idCounter = 100000;
     private long c_ID;
     private String title;
     private int creditPoints;
-    private Professor professor;
+    private ArrayList<Professor> professors;
 
-    public Course(String title, int creditPoints, Professor professor) {
+    public Course(String title, int creditPoints, ArrayList<Professor> professors) {
         setC_ID();
         setTitle(title);
         setCreditPoints(creditPoints);
-        setProfessor(professor);
+        setProfessors(professors);
     }
     public Course() {
         setC_ID();
         this.title = "Title Required";
         this.creditPoints = 1;
-        this.professor = new Professor();
+        this.professors = new ArrayList<Professor>(Arrays.asList(new Professor()));
     }
 
     public boolean checkForSpecChar(String s){
@@ -55,15 +58,15 @@ public class Course {
         this.creditPoints = creditPoints;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public ArrayList<Professor> getProfessor() {
+        return professors;
     }
 
-    public void setProfessor(Professor professor) {
-        if (professor != null)
-            this.professor = professor;
+    public void setProfessors(ArrayList<Professor> professors) {
+        if (professors != null)
+            this.professors = professors;
         else
-            this.professor = new Professor();
+            this.professors = new ArrayList<Professor>(Arrays.asList(new Professor()));
     }
 
     @Override
@@ -72,8 +75,13 @@ public class Course {
                 "c_ID=" + c_ID +
                 ", title='" + title + '\'' +
                 ", creditPoints=" + creditPoints +
-                ", professor=" + professor +
+                ", professor=" + professors +
                 '}';
     }
-
+    public void AddProfessor(Professor professor) throws Exception{
+        if (professor == null) throw new Exception("Invalid professor");
+        if (!professors.contains(professor)){
+            professors.add(professor);
+        }
+    }
 }
