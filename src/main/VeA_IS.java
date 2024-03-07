@@ -55,6 +55,20 @@ public class VeA_IS {
         if (howMany == 0) throw new Exception("Student has no grades");
         return sum/howMany;
     }
+    public static int getProfCourseCount(Professor professor) throws Exception{
+        if (professor == null) throw new Exception("Invalid professor input");
+        int howMany = 0;
+
+        for (Course course: allCourses){
+            if (course.getProfessor().equals(professor)){
+                howMany++;
+            }
+        }
+
+        if (howMany == 0) throw new Exception("Profesor has no courses");
+        return howMany;
+    }
+
     public static void main(String[] args){
         Professor prof1 = new Professor("Jēkabs!", "Voltisz", Degree.phd);
         Professor prof2 = new Professor("Toms", "Balish", Degree.phd);
@@ -78,6 +92,8 @@ public class VeA_IS {
 
         try{
             System.out.println(calcAvgGrade(stud1));
+            System.out.println(getProfCourseCount(prof1));
+
         }catch (Exception e){
             System.out.println(e);
         }
