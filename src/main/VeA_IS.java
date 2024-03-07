@@ -69,19 +69,28 @@ public class VeA_IS {
         return howMany;
     }
 
-    public static void sortStud() throws Exception{
+    public static ArrayList<Student> sortStudByAvgGrade() throws Exception{
         if (allStudents.isEmpty()) throw new Exception("No students in array");
         if (allGrades.isEmpty()) throw new Exception("No grades in array");
-
-        for (int i = 0; i < allStudents.size(); i++) {
-            for (int j = 0; j < allStudents.size() - 1; j++) {
-                if (calcAvgGrade(allStudents.get(j)) > calcAvgGrade(allStudents.get(j+1))){
-                    Student tempStudent = allStudents.get(j);
-                    allStudents.set(j, allStudents.get(j+1));
-                    allStudents.set(j+1, tempStudent);
+        ArrayList<Student> result = new ArrayList<Student>();
+        for (Student st: allStudents){
+            try {
+                calcAvgGrade(st);
+                result.add(st);
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        for (int i = 0; i < result.size(); i++) {
+            for (int j = 0; j < result.size() - 1; j++) {
+                if (calcAvgGrade(result.get(j)) > calcAvgGrade(result.get(j+1))){
+                    Student tempStudent = result.get(j);
+                    result.set(j, result.get(j+1));
+                    result.set(j+1, tempStudent);
                 }
             }
         }
+        return result;
     }
 
     public static void createStudent(String name, String surname)throws Exception{
@@ -151,8 +160,8 @@ public class VeA_IS {
             System.out.println();
 //            System.out.println(calcAvgGrade(stud1));
 //            System.out.println(getProfCourseCount(prof1));
-            sortStud();
-            for (Student student: allStudents){
+            ArrayList<Student> sortedStudents = sortStudByAvgGrade();
+            for (Student student: sortedStudents){
                 System.out.println(student);
             }
         }catch (Exception e){
