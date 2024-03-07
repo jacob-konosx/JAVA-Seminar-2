@@ -69,6 +69,32 @@ public class VeA_IS {
         return howMany;
     }
 
+    public static void sortStud() throws Exception{
+        if (allStudents.isEmpty()) throw new Exception("No students in array");
+        if (allGrades.isEmpty()) throw new Exception("No grades in array");
+
+        for (int i = 0; i < allStudents.size(); i++) {
+            for (int j = 0; j < allStudents.size() - 1; j++) {
+                if (calcAvgGrade(allStudents.get(j)) > calcAvgGrade(allStudents.get(j+1))){
+                    Student tempStudent = allStudents.get(j);
+                    allStudents.set(j, allStudents.get(j+1));
+                    allStudents.set(j+1, tempStudent);
+                }
+            }
+        }
+    }
+
+    public static void createStudent(String name, String surname)throws Exception{
+        if (name == null || surname == null) throw new Exception("Invalid input/s");
+
+        for (Student stud: allStudents){
+            if (stud.getName().equals(name) && stud.getSurname().equals(surname)){
+                throw new Exception("Student with this name and surname already exists");
+            }
+        }
+        Student newStudent = new Student(name, surname);
+        allStudents.add(newStudent);
+    }
     public static void main(String[] args){
         Professor prof1 = new Professor("Jēkabs!", "Voltisz", Degree.phd);
         Professor prof2 = new Professor("Toms", "Balish", Degree.phd);
@@ -86,14 +112,21 @@ public class VeA_IS {
         allCourses.add(course2);
 
         Grade grade1 = new Grade(4, stud1, course1);
-        Grade grade2 = new Grade(10, stud1, course2);
+        Grade grade2 = new Grade(10, stud2, course2);
         allGrades.add(grade1);
         allGrades.add(grade2);
 
         try{
-            System.out.println(calcAvgGrade(stud1));
-            System.out.println(getProfCourseCount(prof1));
-
+                for (Student student: allStudents){
+                    System.out.println(student);
+                }
+            System.out.println();
+//            System.out.println(calcAvgGrade(stud1));
+//            System.out.println(getProfCourseCount(prof1));
+            sortStud();
+            for (Student student: allStudents){
+                System.out.println(student);
+            }
         }catch (Exception e){
             System.out.println(e);
         }
