@@ -95,6 +95,34 @@ public class VeA_IS {
         Student newStudent = new Student(name, surname);
         allStudents.add(newStudent);
     }
+
+    public static Student getStudentBySurname(String surname)throws Exception{
+        if (surname == null) throw new Exception("Invalid surname input");
+        for (Student student: allStudents){
+            if (student.getSurname().equals(surname)) return student;
+        }
+        throw new Exception("No student with this surname");
+    }
+    public static void updateStudentByNameAndSurname(String name, String surname, String newSurname) throws Exception{
+        if (name == null || surname == null || newSurname == null) throw new Exception("Invalid input/s");
+        for (Student stud: allStudents){
+            if (stud.getName().equals(name) && stud.getSurname().equals(surname) && !stud.getSurname().equals(newSurname)){
+                stud.setSurname(newSurname);
+                break;
+            }
+        }
+        throw new Exception("Student aint in system");
+    }
+    public static void deleteStudentByNameAndSurname(String name, String surname) throws Exception{
+        if (name == null || surname == null) throw new Exception("Invalid input/s");
+        for (Student stud: allStudents){
+            if (stud.getName().equals(name) && stud.getSurname().equals(surname)){
+                allStudents.remove(stud);
+                break;
+            }
+        }
+        throw new Exception("Student aint in system");
+    }
     public static void main(String[] args){
         Professor prof1 = new Professor("Jēkabs!", "Voltisz", Degree.phd);
         Professor prof2 = new Professor("Toms", "Balish", Degree.phd);
