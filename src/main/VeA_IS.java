@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class VeA_IS {
-    public static ArrayList<Professor> allProfessors = new
-            ArrayList<>();
-    public static ArrayList<Student> allStudents = new
-            ArrayList<>();
+//    public static ArrayList<Professor> allProfessors = new
+//            ArrayList<>();
+//    public static ArrayList<Student> allStudents = new
+//            ArrayList<>();
     public static ArrayList<Grade> allGrades = new
             ArrayList<>();
     public static ArrayList<Course> allCourses = new
             ArrayList<>();
-    public static ArrayList<Course> allCourses = new
+    public static ArrayList<Person> allPeople = new
             ArrayList<>();
 
     public static float calcAvgGrade(Student stud) throws Exception{
@@ -73,13 +73,16 @@ public class VeA_IS {
     }
 
     public static ArrayList<Student> sortStudByAvgGrade() throws Exception{
-        if (allStudents.isEmpty()) throw new Exception("No students in array");
+        if (allPeople.isEmpty()) throw new Exception("No students in array");
         if (allGrades.isEmpty()) throw new Exception("No grades in array");
         ArrayList<Student> result = new ArrayList<Student>();
-        for (Student st: allStudents){
+        for (Person st: allPeople){
             try {
-                calcAvgGrade(st);
-                result.add(st);
+                if (st instanceof Student){
+                    calcAvgGrade((Student) st);
+                    result.add((Student) st);
+                }
+
             }catch (Exception e){
                 System.out.println(e);
             }
@@ -99,26 +102,29 @@ public class VeA_IS {
     public static void createStudent(String name, String surname)throws Exception{
         if (name == null || surname == null) throw new Exception("Invalid input/s");
 
-        for (Student stud: allStudents){
-            if (stud.getName().equals(name) && stud.getSurname().equals(surname)){
-                throw new Exception("Student with this name and surname already exists");
+        for (Person stud: allPeople){
+            if (stud instanceof Student){
+                if (stud.getName().equals(name) && stud.getSurname().equals(surname)){
+                    throw new Exception("Student with this name and surname already exists");
+                }
             }
+
         }
         Student newStudent = new Student(name, surname);
-        allStudents.add(newStudent);
+        allPeople.add(newStudent);
     }
 
     public static Student getStudentBySurname(String surname)throws Exception{
         if (surname == null) throw new Exception("Invalid surname input");
-        for (Student student: allStudents){
-            if (student.getSurname().equals(surname)) return student;
+        for (Person student: allPeople){
+            if (student.getSurname().equals(surname) && student instanceof Student) return (Student) student;
         }
         throw new Exception("No student with this surname");
     }
     public static void updateStudentByNameAndSurname(String name, String surname, String newSurname) throws Exception{
         if (name == null || surname == null || newSurname == null) throw new Exception("Invalid input/s");
-        for (Student stud: allStudents){
-            if (stud.getName().equals(name) && stud.getSurname().equals(surname) && !stud.getSurname().equals(newSurname)){
+        for (Person stud: allPeople){
+            if (stud instanceof Student && stud.getName().equals(name) && stud.getSurname().equals(surname) && !stud.getSurname().equals(newSurname)){
                 stud.setSurname(newSurname);
                 break;
             }
@@ -127,9 +133,9 @@ public class VeA_IS {
     }
     public static void deleteStudentByNameAndSurname(String name, String surname) throws Exception{
         if (name == null || surname == null) throw new Exception("Invalid input/s");
-        for (Student stud: allStudents){
-            if (stud.getName().equals(name) && stud.getSurname().equals(surname)){
-                allStudents.remove(stud);
+        for (Person stud: allPeople){
+            if (stud instanceof Student && stud.getName().equals(name) && stud.getSurname().equals(surname)){
+                allPeople.remove(stud);
                 break;
             }
         }
@@ -138,13 +144,17 @@ public class VeA_IS {
     public static void main(String[] args){
         Professor prof1 = new Professor("Jēkabs!", "Voltisz", Degree.phd);
         Professor prof2 = new Professor("Toms", "Balish", Degree.phd);
-        allProfessors.add(prof2);
-        allProfessors.add(prof1);
+//        allProfessors.add(prof2);
+//        allProfessors.add(prof1);
 
         Student stud1 = new Student("Endijs", "Bertāns");
         Student stud2 = new Student("Danjels", "Burkēvičs");
-        allStudents.add(stud2);
-        allStudents.add(stud1);
+//        allStudents.add(stud2);
+//        allStudents.add(stud1);
+        allPeople.add(prof1);
+        allPeople.add(prof2);
+        allPeople.add(stud1);
+        allPeople.add(stud2);
 
         Course course1 = new Course("Matene", 4, new ArrayList<Professor>(Arrays.asList(prof1)));
         Course course2 = new Course("Anglene", 2, new ArrayList<Professor>(Arrays.asList(prof2)));
@@ -158,8 +168,8 @@ public class VeA_IS {
 
         try{
             System.out.println(getProfCourseCount(prof1));
-                for (Student student: allStudents){
-                    System.out.println(student);
+                for (Person person: allPeople){
+                    if (person instanceof Student) System.out.println(person);
                 }
             System.out.println();
 //            System.out.println(calcAvgGrade(stud1));
