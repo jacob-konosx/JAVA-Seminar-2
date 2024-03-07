@@ -58,7 +58,7 @@ public class Course {
         this.creditPoints = creditPoints;
     }
 
-    public ArrayList<Professor> getProfessor() {
+    public ArrayList<Professor> getProfessors() {
         return professors;
     }
 

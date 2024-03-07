@@ -14,6 +14,8 @@ public class VeA_IS {
             ArrayList<>();
     public static ArrayList<Course> allCourses = new
             ArrayList<>();
+    public static ArrayList<Course> allCourses = new
+            ArrayList<>();
 
     public static float calcAvgGrade(Student stud) throws Exception{
         if (stud == null) throw new Exception("Invalid student input");
@@ -61,7 +63,7 @@ public class VeA_IS {
         int howMany = 0;
 
         for (Course course: allCourses){
-            if (course.getProfessor().equals(professor)){
+            if (course.getProfessors().contains(professor)){
                 howMany++;
             }
         }
@@ -155,6 +157,7 @@ public class VeA_IS {
         allGrades.add(grade2);
 
         try{
+            System.out.println(getProfCourseCount(prof1));
                 for (Student student: allStudents){
                     System.out.println(student);
                 }
